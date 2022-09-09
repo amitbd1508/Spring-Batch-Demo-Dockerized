@@ -2,25 +2,21 @@ package com.sa.miniproject.one.miniprojectone.config;
 
 import com.sa.miniproject.one.miniprojectone.batch.DbProcessor;
 import com.sa.miniproject.one.miniprojectone.batch.DbWriter;
+import com.sa.miniproject.one.miniprojectone.entity.Person;
 import com.sa.miniproject.one.miniprojectone.mapper.PersonFieldSetMapper;
-import com.sa.miniproject.one.miniprojectone.model.Person;
+import com.sa.miniproject.one.miniprojectone.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-
-import javax.sql.DataSource;
 
 @EnableBatchProcessing
 @Configuration
@@ -31,6 +27,8 @@ public class JobConfiguration {
   private final StepBuilderFactory stepBuilderFactory;
   private final DbWriter dbWriter;
   private final DbProcessor dbProcessor;
+
+  private final PersonService personService;
 
   @Bean
   public FlatFileItemReader<Person> personItemReader() {
@@ -52,6 +50,7 @@ public class JobConfiguration {
 
   @Bean
   public Step step1() {
+    personService.deleteAll();
     return stepBuilderFactory.get("step1")
       .<Person, Person>chunk(10)
       .reader(personItemReader())

@@ -1,4 +1,4 @@
-package com.sa.miniproject.one.miniprojectone.model;
+package com.sa.miniproject.one.miniprojectone.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +25,5 @@ public class Person {
   private String lastName;
   private double gpa;
   private int age;
+  private Date dateOfBirth;
 }

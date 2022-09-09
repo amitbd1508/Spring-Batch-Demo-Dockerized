@@ -1,6 +1,6 @@
 package com.sa.miniproject.one.miniprojectone.repository;
 
-import com.sa.miniproject.one.miniprojectone.model.Person;
+import com.sa.miniproject.one.miniprojectone.entity.Person;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

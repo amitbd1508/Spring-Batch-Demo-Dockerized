@@ -1,23 +1,19 @@
 package com.sa.miniproject.one.miniprojectone.batch;
 
-import com.sa.miniproject.one.miniprojectone.model.Person;
+import com.sa.miniproject.one.miniprojectone.entity.Person;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.util.Calendar;
 
 @Component
 public class DbProcessor implements ItemProcessor<Person, Person> {
-
-  private static final HashMap<String, String> REVIEW_MAPPING = new HashMap<>();
-
   @Override
-  public Person process(Person person) throws Exception {
+  public Person process(Person person) {
 
-    person.setAge(person.getAge() + 100);
-
+    Calendar calendar = Calendar.getInstance();
+    calendar.add(Calendar.YEAR, -person.getAge());
+    person.setDateOfBirth(calendar.getTime());
 
     return person;
   }
