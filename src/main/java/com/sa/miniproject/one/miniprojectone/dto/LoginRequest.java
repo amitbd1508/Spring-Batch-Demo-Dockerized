@@ -1,4 +1,4 @@
-package com.sa.miniproject.one.miniprojectone.model;
+package com.sa.miniproject.one.miniprojectone.dto;
 
 import lombok.Builder;
 import lombok.Data;

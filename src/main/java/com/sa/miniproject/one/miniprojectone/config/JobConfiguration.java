@@ -2,9 +2,9 @@ package com.sa.miniproject.one.miniprojectone.config;
 
 import com.sa.miniproject.one.miniprojectone.batch.DbProcessor;
 import com.sa.miniproject.one.miniprojectone.batch.DbWriter;
-import com.sa.miniproject.one.miniprojectone.entity.Person;
-import com.sa.miniproject.one.miniprojectone.mapper.PersonFieldSetMapper;
-import com.sa.miniproject.one.miniprojectone.service.PersonService;
+import com.sa.miniproject.one.miniprojectone.dto.StudentDto;
+import com.sa.miniproject.one.miniprojectone.entity.Student;
+import com.sa.miniproject.one.miniprojectone.mapper.StudentFieldSetMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -28,31 +28,29 @@ public class JobConfiguration {
   private final DbWriter dbWriter;
   private final DbProcessor dbProcessor;
 
-  private final PersonService personService;
-
   @Bean
-  public FlatFileItemReader<Person> personItemReader() {
-    FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
+  public FlatFileItemReader<StudentDto> personItemReader() {
+    FlatFileItemReader<StudentDto> reader = new FlatFileItemReader<>();
     reader.setLinesToSkip(1);
     reader.setResource(new ClassPathResource("/data/person.csv"));
 
-    DefaultLineMapper<Person> customerLineMapper = new DefaultLineMapper<>();
+    DefaultLineMapper<StudentDto> customerLineMapper = new DefaultLineMapper<>();
 
     DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
     tokenizer.setNames("id", "firstname", "lastname", "gpa", "age");
 
     customerLineMapper.setLineTokenizer(tokenizer);
-    customerLineMapper.setFieldSetMapper(new PersonFieldSetMapper());
+    customerLineMapper.setFieldSetMapper(new StudentFieldSetMapper());
     customerLineMapper.afterPropertiesSet();
     reader.setLineMapper(customerLineMapper);
     return reader;
   }
 
   @Bean
-  public Step step1() {
-    personService.deleteAll();
-    return stepBuilderFactory.get("step1")
-      .<Person, Person>chunk(10)
+  public Step processCSVStep() {
+    return stepBuilderFactory
+      .get("processCSVStep")
+      .<StudentDto, Student>chunk(10)
       .reader(personItemReader())
       .processor(dbProcessor)
       .writer(dbWriter)
@@ -62,7 +60,7 @@ public class JobConfiguration {
   @Bean
   public Job job() {
     return jobBuilderFactory.get("job")
-      .start(step1())
+      .start(processCSVStep())
       .build();
   }
 }

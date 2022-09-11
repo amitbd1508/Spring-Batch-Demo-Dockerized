@@ -1,20 +1,20 @@
 package com.sa.miniproject.one.miniprojectone.batch;
 
-import com.sa.miniproject.one.miniprojectone.entity.Person;
+import com.sa.miniproject.one.miniprojectone.dto.StudentDto;
+import com.sa.miniproject.one.miniprojectone.entity.Student;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 
 @Component
-public class DbProcessor implements ItemProcessor<Person, Person> {
+public class DbProcessor implements ItemProcessor<StudentDto, Student> {
   @Override
-  public Person process(Person person) {
+  public Student process(StudentDto studentDto) {
 
     Calendar calendar = Calendar.getInstance();
-    calendar.add(Calendar.YEAR, -person.getAge());
-    person.setDateOfBirth(calendar.getTime());
+    calendar.add(Calendar.YEAR, - studentDto.getAge());
 
-    return person;
+    return new Student(studentDto.getId(), studentDto.getFirstName(), studentDto.getFirstName(), studentDto.getGpa(), calendar.getTime());
   }
 }

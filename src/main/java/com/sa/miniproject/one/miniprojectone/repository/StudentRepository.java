@@ -1,9 +1,9 @@
 package com.sa.miniproject.one.miniprojectone.repository;
 
-import com.sa.miniproject.one.miniprojectone.entity.Person;
+import com.sa.miniproject.one.miniprojectone.entity.Student;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PersonRepository extends CrudRepository<Person, Person> {
+public interface StudentRepository extends CrudRepository<Student, Student> {
 }

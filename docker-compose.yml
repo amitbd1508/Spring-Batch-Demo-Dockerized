@@ -5,16 +5,18 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
-      - MYSQL_DATABASE=demo
+      - MYSQL_DATABASE=studentdb
     ports:
-      - "3306:3306"
+      - "3311:3306"
+    volumes:
+      - ./db:/var/lib/mysql
   springboot-csv-parser:
     image: springboot-csv-parser
     restart: on-failure
     ports:
       - "8082:8080"
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/demo?autoReconnect=true&useSSL=false"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/studentdb?autoReconnect=true&useSSL=false"
       SPRING_DATASOURCE_USERNAME: "root"
       SPRING_DATASOURCE_PASSWORD: "root"
     build: ./

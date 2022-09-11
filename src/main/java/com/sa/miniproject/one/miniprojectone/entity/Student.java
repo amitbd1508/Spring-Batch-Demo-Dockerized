@@ -13,17 +13,14 @@ import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @Data
-public class Person {
+public class Student {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-
   private String firstName;
   private String lastName;
   private double gpa;
-  private int age;
   private Date dateOfBirth;
 }

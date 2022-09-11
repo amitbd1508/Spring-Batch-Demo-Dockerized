@@ -1,8 +1,8 @@
 package com.sa.miniproject.one.miniprojectone.batch;
 
 
-import com.sa.miniproject.one.miniprojectone.entity.Person;
-import com.sa.miniproject.one.miniprojectone.service.PersonService;
+import com.sa.miniproject.one.miniprojectone.entity.Student;
+import com.sa.miniproject.one.miniprojectone.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
@@ -11,12 +11,12 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class DbWriter implements ItemWriter<Person> {
+public class DbWriter implements ItemWriter<Student> {
 
-  private final PersonService personService;
+  private final StudentService studentService;
 
   @Override
-  public void write(List<? extends Person> list) {
-    personService.saveAll((List<Person>) list);
+  public void write(List<? extends Student> list) {
+    studentService.saveAll((List<Student>) list);
   }
 }

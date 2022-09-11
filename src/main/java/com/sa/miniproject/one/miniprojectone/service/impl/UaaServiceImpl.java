@@ -1,9 +1,9 @@
 package com.sa.miniproject.one.miniprojectone.service.impl;
 
 
-import com.sa.miniproject.one.miniprojectone.model.LoginRequest;
-import com.sa.miniproject.one.miniprojectone.model.LoginResponse;
-import com.sa.miniproject.one.miniprojectone.model.RefreshTokenRequest;
+import com.sa.miniproject.one.miniprojectone.dto.LoginRequest;
+import com.sa.miniproject.one.miniprojectone.dto.LoginResponse;
+import com.sa.miniproject.one.miniprojectone.dto.RefreshTokenRequest;
 import com.sa.miniproject.one.miniprojectone.security.JwtHelper;
 import com.sa.miniproject.one.miniprojectone.service.UaaService;
 import lombok.RequiredArgsConstructor;

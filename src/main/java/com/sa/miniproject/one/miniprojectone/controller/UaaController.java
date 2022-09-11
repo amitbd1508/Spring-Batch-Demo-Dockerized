@@ -1,8 +1,8 @@
 package com.sa.miniproject.one.miniprojectone.controller;
 
-import com.sa.miniproject.one.miniprojectone.model.LoginRequest;
-import com.sa.miniproject.one.miniprojectone.model.LoginResponse;
-import com.sa.miniproject.one.miniprojectone.model.RefreshTokenRequest;
+import com.sa.miniproject.one.miniprojectone.dto.LoginRequest;
+import com.sa.miniproject.one.miniprojectone.dto.LoginResponse;
+import com.sa.miniproject.one.miniprojectone.dto.RefreshTokenRequest;
 import com.sa.miniproject.one.miniprojectone.service.UaaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
