@@ -67,7 +67,7 @@ Get familiar with:
 ### Run
 ``docker compose up ``
 
-### [optional] Stop running containner 
+### [optional] Stop running container 
 ``docker compose down``
 
 ### Login credentials
